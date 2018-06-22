@@ -1,192 +1,75 @@
+$(document).ready(function(){
 
-$(function(){
+  // $('#button').on( "click", function() {
+  //   if($('#listInput').text !== ''){
+  //     console.log($('#listInput').text);
+  //     var toAdd = $('input[name=ListItem]').val();
+  //     $('ol').append('<li>' + toAdd + '</li>');
+  //   }
+  // });
 
-    var Todo = Backbone.Model.extend({
-
-    defaults: function() {
-      return {
-        title: "empty todo...",
-        order: Todos.nextOrder(),
-        done: false
-      };
-    },
-
-
-    toggle: function() {
-      this.save({done: !this.get("done")});
+  // $(this).closest('.add-to-list').on('click', function()
+  $(document).on('click', '.add-to-list', function(){
+  // $('.add-to-list').on('click', function() {
+  // $('#button').on('click', function() {
+    if($('.listInput').val() !== ''){
+      // console.log( $(this).prev('input[name=ListItem]').val() );
+      var toAdd = $(this).prev('.listInput').val();
+      console.log(toAdd);
+      $(this).siblings('.list').append('<li>' + toAdd + '</li>');
+      // $('ol').append('<li>' + toAdd + '</li>');
     }
-
   });
 
+  // $("input[name=ListItem]").keyup(function(event){
+  //   if(event.keyCode == 13){
+  //     $("#button").click();
+  //     console.log("Hii");
+  //   }
+  // });
 
-  var TodoList = Backbone.Collection.extend({
-
-    model: Todo,
-
-    localStorage: new Backbone.LocalStorage("todos-backbone"),
-
-    done: function() {
-      return this.where({done: true});
-    },
-
-    remaining: function() {
-      return this.where({done: false});
-    },
-
-
-    nextOrder: function() {
-      if (!this.length) return 1;
-      return this.last().get('order') + 1;
-    },
-
-    comparator: 'order'
-
+  $(document).on('dblclick','li', function(){
+    // $(this).toggleClass('strike').fadeOut('slow');
+    $(this).toggleClass('strike');
   });
 
-  var Todos = new TodoList;
+  // $('input').focus(function() {
+  //   $(this).val('');
+  // });
 
-  var TodoView = Backbone.View.extend({
+  $('ol').sortable();
 
-    tagName:  "li",
-
-    template: _.template($('#item-template').html()),
-
-    events: {
-      "click .toggle"   : "toggleDone",
-      "dblclick .view"  : "edit",
-      "click a.destroy" : "clear",
-      "keypress .edit"  : "updateOnEnter",
-      "blur .edit"      : "close"
-    },
-
-    initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'destroy', this.remove);
-    },
-
-    render: function() {
-      this.$el.html(this.template(this.model.toJSON()));
-      this.$el.toggleClass('done', this.model.get('done'));
-      this.input = this.$('.edit');
-      return this;
-    },
-
-
-    toggleDone: function() {
-      this.model.toggle();
-    },
-
-
-    edit: function() {
-      this.$el.addClass("editing");
-      this.input.focus();
-    },
-
-
-    close: function() {
-      var value = this.input.val();
-      if (!value) {
-        this.clear();
-      } else {
-        this.model.save({title: value});
-        this.$el.removeClass("editing");
-      }
-    },
-
-
-    updateOnEnter: function(e) {
-      if (e.keyCode == 13) this.close();
-    },
-
-    clear: function() {
-      this.model.destroy();
+  var listMaker = function( number ){
+    if( $('#add-hour').length) {
+      $('.hour-' + number).append('<div class="list-container">' +
+        '<h2>Hour ' + number + '</h2>' +
+      	// '	<form name="toDoList">	<input type="text" name="ListItem" id="listInput" class="listInput"/></form>' +
+      	'	<input type="text" name="ListItem" id="listInput" class="listInput"/>' +
+        ' <button type="button" class="btn btn-secondary add-to-list">Add</button>' +
+        ' <br/>'+
+        ' <ol class="list"></ol> '+
+        ' </div>'
+      );
     }
+  }
 
-  });
+  if( $('#add-hour').length ){
+    var numberOfRows = 0;
+    var numberOfHours = 0;
+    $('#add-hour').on("click", function() {
 
-
-
-  var AppView = Backbone.View.extend({
-
-
-    el: $("#todoapp"),
-
-
-    statsTemplate: _.template($('#stats-template').html()),
-
-
-
-
-    events: {
-      "keypress #new-todo":  "createOnEnter",
-      "click #clear-completed": "clearCompleted",
-      "click #toggle-all": "toggleAllComplete"
-    },
-
-    initialize: function() {
-
-      this.input = this.$("#new-todo");
-      this.allCheckbox = this.$("#toggle-all")[0];
-
-      this.listenTo(Todos, 'add', this.addOne);
-      this.listenTo(Todos, 'reset', this.addAll);
-      this.listenTo(Todos, 'all', this.render);
-
-      this.footer = this.$('footer');
-      this.main = $('#main');
-
-      Todos.fetch();
-    },
-
-
-    render: function() {
-      var done = Todos.done().length;
-      var remaining = Todos.remaining().length;
-
-      if (Todos.length) {
-        this.main.show();
-        this.footer.show();
-        this.footer.html(this.statsTemplate({done: done, remaining: remaining}));
-      } else {
-        this.main.hide();
-        this.footer.hide();
+      if( numberOfRows === 0 ){
+        $('.task-holder').append('<div class="row first-row"></div>');
+        numberOfRows++;
       }
 
-      this.allCheckbox.checked = !remaining;
-    },
+      if( numberOfHours < 4 ) {
+        $('.first-row').append('<div class="col-md-3 list-box hour-' + numberOfHours + '"></div>');
+        listMaker( numberOfHours );
+        numberOfHours++;
+      }
 
-    addOne: function(todo) {
-      var view = new TodoView({model: todo});
-      this.$("#todo-list").append(view.render().el);
-    },
-
-    addAll: function() {
-      Todos.each(this.addOne, this);
-    },
-
-
-    createOnEnter: function(e) {
-      if (e.keyCode != 13) return;
-      if (!this.input.val()) return;
-
-      Todos.create({title: this.input.val()});
-      this.input.val('');
-    },
-
-
-    clearCompleted: function() {
-      _.invoke(Todos.done(), 'destroy');
-      return false;
-    },
-
-    toggleAllComplete: function () {
-      var done = this.allCheckbox.checked;
-      Todos.each(function (todo) { todo.save({'done': done}); });
-    }
-
-  });
-
-
-  var App = new AppView;
+    });
+  }
 
 });
