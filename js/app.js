@@ -7,7 +7,6 @@ $(document).ready(function(){
     return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
   }
 
-  // $(this).closest('.add-to-list').on('click', function()
   $(document).on('click', '.add-to-list', function(){
     if( $(this).closest('.list-box').find('.list-input').val() !== ''){
       // Grab the input from the closest input bar
@@ -20,11 +19,10 @@ $(document).ready(function(){
     }
   });
 
-  //Press enter to add to list
-  $(".list-input").keyup(function(event){
+  // Press enter to add item to list
+  $(document).on('keyup','.list-input', function(){
     if(event.keyCode == 13){
-      $(".add-to-list").click();
-      console.log("Hii");
+        $(this).closest('.list-box').find(".add-to-list").click();
     }
   });
 
@@ -63,7 +61,7 @@ $(document).ready(function(){
       }
 
        if( numberOfHours < 25 ) {
-        $('.first-row').append('<div class="col-md-3 list-box hour-' + numberOfHours + '"></div>');
+        $('.first-row').append('<div class="col-md-6 list-box hour-' + numberOfHours + '"></div>');
         listMaker( numberOfHours );
         numberOfHours++;
        }
@@ -71,9 +69,8 @@ $(document).ready(function(){
     });
   }
 
+  // Toggle between daily and hourly tasks
   $('.daily-hourly').on('click', function() {
-
-    console.log($('.daily-hourly').text());
     if( $('.daily-hourly').text() == 'Daily'){
       $(this).text('Hourly');
       $('.task-holder').hide();
@@ -84,6 +81,6 @@ $(document).ready(function(){
       $('.task-holder').show();
       $('.daily-container').hide();
     }
-
   });
+
 });
