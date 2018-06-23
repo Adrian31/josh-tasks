@@ -97,6 +97,9 @@ li:hover{
    margin-bottom: 10px;
  }
 
+.list-input:focus{
+  outline: none;
+}
 
 /* FOOTER */
 
