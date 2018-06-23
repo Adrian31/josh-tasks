@@ -16,26 +16,27 @@ $(document).ready(function(){
       // console.log( $(this).prev('input[name=ListItem]').val() );
       var toAdd = $(this).prev('.listInput').val();
       console.log(toAdd);
-      $(this).siblings('.list').append('<li>' + toAdd + '</li>');
+      $(this).siblings('.list').append('<li class="list-item">' + toAdd + '</li>');
       // $('ol').append('<li>' + toAdd + '</li>');
     }
   });
 
-  // $("input[name=ListItem]").keyup(function(event){
-  //   if(event.keyCode == 13){
-  //     $("#button").click();
-  //     console.log("Hii");
-  //   }
-  // });
+  $('input').focus(function() {
+    $(this).val('');
+  });
 
-  $(document).on('dblclick','li', function(){
+  //Press enter to add to list
+  $("input[name=ListItem]").keyup(function(event){
+    if(event.keyCode == 13){
+      $(".add-to-list").click();
+      console.log("Hii");
+    }
+  });
+
+  $(document).on('click','.list-item', function(){
     // $(this).toggleClass('strike').fadeOut('slow');
     $(this).toggleClass('strike');
   });
-
-  // $('input').focus(function() {
-  //   $(this).val('');
-  // });
 
   $('ol').sortable();
 
@@ -56,7 +57,7 @@ $(document).ready(function(){
   if( $('#add-hour').length ){
     var numberOfRows = 0;
     var numberOfHours = 0;
-    $('#add-hour').on("click", function() {
+    $('.footer').on("click", function() {
 
       if( numberOfRows === 0 ){
         $('.task-holder').append('<div class="row first-row"></div>');

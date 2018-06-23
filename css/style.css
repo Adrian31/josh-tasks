@@ -11,6 +11,11 @@ video#bgvid {
     background-size: cover;
 }
 
+.title {
+  text-align: center;
+  margin-top: 10px;
+}
+
 form {
 display: inline-block;
 }
@@ -59,3 +64,32 @@ ol li:nth-child(even){background: #dfdfdf;}
 li:hover{
   cursor: pointer;
  }
+
+
+/* FOOTER */
+
+.footer{
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  opacity: .8;
+}
+
+.footer:hover{
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity .5s ease-out;
+  -moz-transition: opacity .5s ease-out;
+  -webkit-transition: opacity .5s ease-out;
+  -o-transition: opacity .5s ease-out;
+}
+
+#add-hour {
+  padding: 20px;
+}
+
+#add-hour > h2:hover {
+  opacity: 1 !important;
+}
