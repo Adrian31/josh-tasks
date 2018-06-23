@@ -21,7 +21,7 @@ $(document).ready(function(){
   });
 
   //Press enter to add to list
-  $("input[name=ListItem]").keyup(function(event){
+  $(".list-input").keyup(function(event){
     if(event.keyCode == 13){
       $(".add-to-list").click();
       console.log("Hii");
