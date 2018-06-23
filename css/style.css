@@ -30,7 +30,7 @@ display: inline-block;
 
 .list-container {
   background-color: white;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   padding: 5px;
 }
 
@@ -47,6 +47,24 @@ display: inline-block;
 
 .add-to-list{
   width: 100%;
+  background-color: #6c757d;
+  color: white;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+.add-to-list:hover {
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity .5s ease-out;
+  -moz-transition: opacity .5s ease-out;
+  -webkit-transition: opacity .5s ease-out;
+  -o-transition: opacity .5s ease-out;
+}
+
+.list {
+  background-color: white;
 }
 
 #button:hover{
@@ -63,6 +81,20 @@ ol li:nth-child(even){background: #dfdfdf;}
 
 li:hover{
   cursor: pointer;
+}
+
+.list-container{
+  padding: 20px;
+}
+/* input */
+
+ .list-input{
+   background: transparent;
+   border: none;
+   border-bottom: 1px solid #000000;
+   padding: 2px 5px;
+   width: 100%;
+   margin-bottom: 10px;
  }
 
 

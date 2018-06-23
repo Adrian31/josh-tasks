@@ -1,21 +1,13 @@
 $(document).ready(function(){
 
-  // $('#button').on( "click", function() {
-  //   if($('#listInput').text !== ''){
-  //     console.log($('#listInput').text);
-  //     var toAdd = $('input[name=ListItem]').val();
-  //     $('ol').append('<li>' + toAdd + '</li>');
-  //   }
-  // });
-
   // $(this).closest('.add-to-list').on('click', function()
   $(document).on('click', '.add-to-list', function(){
   // $('.add-to-list').on('click', function() {
   // $('#button').on('click', function() {
-    if($('.listInput').val() !== ''){
+    if($('.list-input').val() !== ''){
       // console.log( $(this).prev('input[name=ListItem]').val() );
-      var toAdd = $(this).prev('.listInput').val();
-      console.log(toAdd);
+      var toAdd = $(this).closest('.list-box').find('.list-input').val();
+      console.log( $(this).attr('class'));
       $(this).siblings('.list').append('<li class="list-item">' + toAdd + '</li>');
       // $('ol').append('<li>' + toAdd + '</li>');
     }
@@ -42,13 +34,18 @@ $(document).ready(function(){
 
   var listMaker = function( number ){
     if( $('#add-hour').length) {
-      $('.hour-' + number).append('<div class="list-container">' +
-        '<h2>Hour ' + number + '</h2>' +
-      	// '	<form name="toDoList">	<input type="text" name="ListItem" id="listInput" class="listInput"/></form>' +
-      	'	<input type="text" name="ListItem" id="listInput" class="listInput"/>' +
-        ' <button type="button" class="btn btn-secondary add-to-list">Add</button>' +
-        ' <br/>'+
-        ' <ol class="list"></ol> '+
+      $('.hour-' + number).append(
+        ' <div class="list-container">' +
+          ' <h2>Hour ' + number + '</h2>' +
+    	    '	<input type="text" name="ListItem" class="list-input" autocomplete="off"/>' +
+          // ' <button type="button" class="btn btn-secondary add-to-list">Add</button>' +
+          // ' <br/>'+
+          // ' <ol class="list"></ol> '+
+        ' </div>' +
+        ' <div>' +
+          ' <h3 class="add-to-list">Add</h3>' +
+          // ' <br/>'+
+          ' <ol class="list"></ol> '+
         ' </div>'
       );
     }
