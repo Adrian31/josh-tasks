@@ -4,11 +4,12 @@
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta charset="utf-8">
-		
+
 		<title>J Tasks</title>
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/style.css">
+		<!-- <link rel="stylesheet" href="css/checkbox.css"> -->
 	</head>
 
 	<body>
@@ -26,8 +27,24 @@
 				<button type="button" class="btn btn-secondary daily-hourly">Daily</button>
 			</div>
 		</nav>
+		<!-- Stopwatch -->
+		<div class="stopwatch">
+			<div class="col-md-3">
+			<div id="chronoExample">
+	    	<div class="values">00:00:00</div>
+	    	<div>
+	        <button class="startButton btn btn-primary">Start</button>
+	        <button class="pauseButton btn btn-secondary" >Pause</button>
+	        <!-- <button class="stopButton">Stop</button> -->
+	        <button class="resetButton btn btn-danger">Reset</button>
+	  		</div>
+			</div>
+		</div>
+		</div>
 
     <div class="container">
+
+
 			<!-- Daily Container -->
 			<div class="daily-container list-box">
 				<div class="list-container">
@@ -55,6 +72,8 @@
     <script src="js/jquery/jquery.js"></script>
     <script src="js/jquery/jquery-ui.js"></script>
     <script src="js/bootstrap/bootstrap.js"></script>
+		<script src="js/easytimer/easytimer.js"></script>
+		<script src="js/stopwatch.js"></script>
     <!-- <script src="js/underscore/underscore.js"></script> -->
 		<!-- <script src="js/backbone/backbone.js"></script> -->
 		<!-- <script src="js/backbone/backbone.localstorage.js"></script> -->

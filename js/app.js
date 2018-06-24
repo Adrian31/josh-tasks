@@ -14,9 +14,18 @@ $(document).ready(function(){
 
       // Push the input to the closest list
       $(this).siblings('.list').append(
-        '<li class="list-item">' + toAdd + '</li>'
+        '<li class="list-item">' +
+          '<div class="col-md-11">' + toAdd + '</div>' +
+          '<div class="">' +
+            // '<div class="input-group-text">' +
+            '<input type="checkbox" name="cb" id="cb1" />' +
+            // '<label for="cb1">Check this</label>' +
+            // '</div>' +
+          '</div>'+
+        '</li>'
       );
     }
+    $('ol').sortable();
   });
 
   // Press enter to add item to list
@@ -29,10 +38,10 @@ $(document).ready(function(){
   $(document).on('click','.list-item', function(){
     // $(this).toggleClass('strike').fadeOut('slow');
     $(this).toggleClass('strike');
-    $('ol').sortable();
+
   });
 
-  $('ol').sortable();
+  // $('ol').sortable();
 
   var listMaker = function( number ){
 

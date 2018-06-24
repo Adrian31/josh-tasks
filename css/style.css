@@ -18,6 +18,17 @@ video#bgvid {
 
 /**/
 
+/** STOPWATCH **/
+.stopwatch{
+  background-color: gainsboro;
+  padding: 10px;
+  text-align: center;
+}
+
+.values{
+  font-size: 200%;
+}
+
 /* DAILY CONTAINER */
   .daily-container {
     max-width: 500px;
@@ -63,6 +74,7 @@ video#bgvid {
 
 .list {
   background-color: white;
+  margin-bottom: 0px;
 }
 
 .first-row {
@@ -88,6 +100,18 @@ li:hover{
 .list-container{
   padding: 20px;
 }
+
+li * {
+  display: inline-block;
+}
+
+/* LIST BOX */
+.list-box {
+  border: 5px solid gainsboro;
+  padding: 0px;
+}
+
+
 
 /* TASK CONTAINER */
 .task-holder {
