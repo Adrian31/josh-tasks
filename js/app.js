@@ -14,14 +14,13 @@ $(document).ready(function(){
 
       // Push the input to the closest list
       $(this).siblings('.list').append(
-        '<li class="list-item">' +
-          '<div class="col-md-11">' + toAdd + '</div>' +
-          '<div class="">' +
-            // '<div class="input-group-text">' +
-            '<input type="checkbox" name="cb" id="cb1" />' +
-            // '<label for="cb1">Check this</label>' +
-            // '</div>' +
-          '</div>'+
+        '<li>' +
+          '<div class="list-item">' +
+            toAdd +
+          '</div>' +
+          '<div class="time-taken">' +
+          '</div>' +
+            '<input type="radio" name="cb" class="list-checkbox" />' +
         '</li>'
       );
     }
@@ -38,10 +37,21 @@ $(document).ready(function(){
   $(document).on('click','.list-item', function(){
     // $(this).toggleClass('strike').fadeOut('slow');
     $(this).toggleClass('strike');
-
   });
 
-  // $('ol').sortable();
+
+  $(document).on('click', '.list-checkbox', function() {
+    var selectedTask = $(this).siblings('.list-item').text();
+    $('.currently-selected-task').text(selectedTask);
+  });
+
+  $(document).on('click', '.stopButton', function(){
+    var stopTime = $('.values').text();
+    if ($('input.list-checkbox').is(':checked')) {
+      $('input.list-checkbox:checked').siblings('.time-taken').text("H:M:S " + stopTime);
+      $('input.list-checkbox:checked').siblings('.list-item').toggleClass('strike');
+    }
+  });
 
   var listMaker = function( number ){
 
@@ -52,12 +62,13 @@ $(document).ready(function(){
     	    '	<input type="text" name="ListItem" class="list-input" autocomplete="off"/>' +
         ' </div>' +
         ' <div>' +
-          ' <h3 class="add-to-list">Add</h3>' +
+          ' <h3 class="add-to-list">+ Task</h3>' +
           ' <ol class="list"></ol> '+
         ' </div>'
       );
     }
   }
+
 
   if( $('#add-hour').length ){
     var numberOfRows = 0;

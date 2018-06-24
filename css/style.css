@@ -23,6 +23,8 @@ video#bgvid {
   background-color: gainsboro;
   padding: 10px;
   text-align: center;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
 }
 
 .values{
@@ -85,13 +87,22 @@ video#bgvid {
 cursor: pointer;
 opacity: .8;}
 
-ol {padding-left: 20px;}
+ol {
+  padding-left: 0px;
+  list-style-type: none;
+}
 
-ol li {padding: 5px;color:#000;}
+ol li {
+  padding: 5px;color:#000;
+  padding-left: 10px;
+}
 
 ol li:nth-child(even){background: #dfdfdf;}
 
-.strike{text-decoration: line-through;}
+.strike {
+  text-decoration: line-through !important;
+  opacity: .5;
+}
 
 li:hover{
   cursor: pointer;
@@ -107,11 +118,9 @@ li * {
 
 /* LIST BOX */
 .list-box {
-  border: 5px solid gainsboro;
-  padding: 0px;
+  /* border: 5px solid gainsboro; */
+  padding: 10px;
 }
-
-
 
 /* TASK CONTAINER */
 .task-holder {
@@ -121,6 +130,24 @@ li * {
 .list-header{
   text-transform:capitalize;
 }
+
+.list-item {
+  width: 60%;
+}
+
+.time-taken {
+  width: 20%;
+}
+
+.list-checkbox {
+  width: 20%;
+}
+
+/* TIMER */
+  .currently-selected-task {
+    color: grey;
+  }
+/* */
 /* input */
 
  .list-input{
@@ -135,10 +162,6 @@ li * {
 
 .list-input:focus{
   outline: none;
-}
-
-.strike {
-  opacity: .5;
 }
 
 /* FOOTER */
