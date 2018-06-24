@@ -10,6 +10,7 @@ $('#chronoExample .stopButton').click(function () {
 });
 $('#chronoExample .resetButton').click(function () {
     timer.reset();
+    timer.pause();
 });
 timer.addEventListener('secondsUpdated', function (e) {
     $('#chronoExample .values').html(timer.getTimeValues().toString());
@@ -20,4 +21,3 @@ timer.addEventListener('started', function (e) {
 timer.addEventListener('reset', function (e) {
     $('#chronoExample .values').html(timer.getTimeValues().toString());
 });
-      

@@ -13,7 +13,11 @@ video#bgvid {
 
 /* HEADER */
 .daily-hourly {
-  font-size: 28px;
+  font-size: 18px;
+}
+
+.stopwatch-toggle {
+  font-size: 18px;
 }
 
 /**/
@@ -31,6 +35,13 @@ video#bgvid {
   font-size: 200%;
 }
 
+@media screen and (max-width: 800px){
+  .currently-selected-task {
+    padding-top: 20px;
+  }
+}
+
+/* */
 /* DAILY CONTAINER */
   .daily-container {
     max-width: 500px;
@@ -119,6 +130,10 @@ li * {
 /* LIST BOX */
 .list-box {
   /* border: 5px solid gainsboro; */
+  padding: 10px;
+}
+
+.task-list-item-container{
   padding: 10px;
 }
 

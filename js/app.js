@@ -15,7 +15,7 @@ $(document).ready(function(){
 
       // Push the input to the closest list
       $(this).siblings('.list').append(
-        '<li>' +
+        '<li class="align-items-center task-list-item-container">' +
           '<div class="list-item">' +
             toAdd +
           '</div>' +
@@ -97,13 +97,31 @@ $(document).ready(function(){
   $('.daily-hourly').on('click', function() {
     if( $('.daily-hourly').text() == 'Daily'){
       $(this).text('Hourly');
-      $('.task-holder').hide();
-      $('.daily-container').show();
+      $('.task-holder').fadeOut('slow');
+      $('.footer').fadeOut('slow');
+      $('.daily-container').fadeIn('slow');
     }
     else if( $('.daily-hourly').text() == 'Hourly'){
       $(this).text('Daily');
-      $('.task-holder').show();
-      $('.daily-container').hide();
+      $('.task-holder').fadeIn('slow');
+      $('.footer').fadeIn('slow');
+      $('.daily-container').fadeOut('slow');
+    }
+  });
+
+  // Toggle between daily and hourly tasks
+  $('.stopwatch-toggle').on('click', function() {
+    if( $('.stopwatch-toggle').hasClass('show-stopwatch')){
+      $('.stopwatch').fadeOut('slow');
+      $('.stopwatch-toggle').addClass('hide-stopwatch');
+      $('.stopwatch-toggle').removeClass('show-stopwatch');
+      // $('.list-checkbox').fadeIn('slow');
+    }
+    else if($('.stopwatch-toggle').hasClass('hide-stopwatch')){
+      $('.stopwatch').fadeIn('slow');
+      $('.stopwatch-toggle').removeClass('hide-stopwatch');
+      $('.stopwatch-toggle').addClass('show-stopwatch');
+      // $('.list-checkbox').fadeOut('slow');
     }
   });
 
