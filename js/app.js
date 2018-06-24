@@ -7,6 +7,7 @@ $(document).ready(function(){
     return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
   }
 
+  // Add task to list
   $(document).on('click', '.add-to-list', function(){
     if( $(this).closest('.list-box').find('.list-input').val() !== ''){
       // Grab the input from the closest input bar
@@ -42,7 +43,10 @@ $(document).ready(function(){
 
   $(document).on('click', '.list-checkbox', function() {
     var selectedTask = $(this).siblings('.list-item').text();
-    $('.currently-selected-task').text(selectedTask);
+
+    $(".currently-selected-task").fadeOut(function() {
+      $('.currently-selected-task').text(selectedTask);
+    }).fadeIn();
   });
 
   $(document).on('click', '.stopButton', function(){
