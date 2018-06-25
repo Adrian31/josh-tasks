@@ -7,6 +7,31 @@ $(document).ready(function(){
     return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
   }
 
+  var makeDraggable = function() {
+    $( ".column" ).sortable({
+      connectWith: ".column",
+      handle: ".portlet-header",
+      cancel: ".portlet-toggle",
+      placeholder: "portlet-placeholder ui-corner-all"
+    });
+
+    // if( !$('.portlet').hasClass( "ui-widget" ) ){
+    //   $( ".portlet" )
+    //     .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
+    //     .find( ".portlet-header" )
+    //       .addClass( "ui-widget-header ui-corner-all" )
+    //       .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+    // }
+
+    $( ".portlet-toggle" ).on( "click", function() {
+      var icon = $( this );
+      icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
+      icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
+    });
+  }
+
+
+
   // Add task to list
   $(document).on('click', '.add-to-list', function(){
     if( $(this).closest('.list-box').find('.list-input').val() !== ''){
@@ -15,8 +40,8 @@ $(document).ready(function(){
 
       // Push the input to the closest list
       $(this).siblings('.list').append(
-        '<li class="align-items-center task-list-item-container">' +
-          '<div class="list-item">' +
+        '<li class="align-items-center task-list-item-container portlet">' +
+          '<div class="list-item portlet-header">' +
             toAdd +
           '</div>' +
           '<div class="time-taken">' +
@@ -26,6 +51,7 @@ $(document).ready(function(){
       );
     }
     $('ol').sortable();
+    makeDraggable();
     // Clear the list input when a task is added
     $('.list-input').val("");
   });
@@ -73,7 +99,11 @@ $(document).ready(function(){
         ' </div>' +
         ' <div>' +
           ' <h3 class="add-to-list">+ Task</h3>' +
-          ' <ol class="list"></ol> '+
+          ' <ol class="column list">'+
+            '<li class="initial-list align-items-center task-list-item-container portlet>' +
+            '<div class="list-item portlet-header ui-sortable-handle"></div>'+
+            '</li>'+
+          '</ol> '+
         ' </div>'
       );
     }

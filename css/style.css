@@ -1,3 +1,7 @@
+body{
+  max-width: 1200px !important;  
+}
+
 video#bgvid {
     position: fixed;
     right: 0;
@@ -132,6 +136,12 @@ li * {
 .list-box {
   /* border: 5px solid gainsboro; */
   padding: 10px;
+}
+
+.initial-list{
+  height: 3px !important;
+  padding: 0px !important;
+  background-color: #6c757d !important;
 }
 
 .task-list-item-container{
