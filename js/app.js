@@ -26,13 +26,18 @@ $(document).ready(function(){
       );
     }
     $('ol').sortable();
+    // Clear the list input when a task is added
+    $('.list-input').val("");
   });
 
   // Press enter to add item to list
   $(document).on('keyup','.list-input', function(){
     if(event.keyCode == 13){
         $(this).closest('.list-box').find(".add-to-list").click();
+        // Clear the list input when a task is added
+        $('.list-input').val("");
     }
+
   });
 
   $(document).on('click','.list-item', function(){
@@ -40,7 +45,7 @@ $(document).ready(function(){
     $(this).toggleClass('strike');
   });
 
-
+// Show your active task at the top of the screen
   $(document).on('click', '.list-checkbox', function() {
     var selectedTask = $(this).siblings('.list-item').text();
 
@@ -49,6 +54,7 @@ $(document).ready(function(){
     }).fadeIn();
   });
 
+// Log the time for the currently selected task
   $(document).on('click', '.stopButton', function(){
     var stopTime = $('.values').text();
     if ($('input.list-checkbox').is(':checked')) {
@@ -73,7 +79,7 @@ $(document).ready(function(){
     }
   }
 
-
+// Add an hour to the task holder div
   if( $('#add-hour').length ){
     var numberOfRows = 0;
     var numberOfHours = 1;
