@@ -135,7 +135,7 @@ li * {
 }
 
 .initial-list{
-  height: 4px !important;
+  height: 20px !important;
   padding: 0px !important;
   background-color: #6c757d !important;
 }
@@ -218,3 +218,6 @@ li * {
 #add-hour > h2:hover {
   opacity: 1 !important;
 }
+
+
+/* JQUERY PORTLET */
