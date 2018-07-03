@@ -7,6 +7,16 @@ $(document).ready(function(){
     return deca[Math.floor(n/10)-2] + 'y-' + special[n%10];
   }
 
+  var makeDraggable = function() {
+    console.log("hi");
+    $( ".column" ).sortable({
+      connectWith: ".column",
+      handle: ".portlet-header",
+    });
+  }
+
+
+  // Add task to list
   $(document).on('click', '.add-to-list', function(){
     if( $(this).closest('.list-box').find('.list-input').val() !== ''){
       // Grab the input from the closest input bar
@@ -14,34 +24,56 @@ $(document).ready(function(){
 
       // Push the input to the closest list
       $(this).siblings('.list').append(
-        '<li class="list-item">' +
-          '<div class="col-md-11">' + toAdd + '</div>' +
-          '<div class="">' +
-            // '<div class="input-group-text">' +
-            '<input type="checkbox" name="cb" id="cb1" />' +
-            // '<label for="cb1">Check this</label>' +
-            // '</div>' +
-          '</div>'+
+        '<li class="portlet-header">' +
+        '<div class="align-items-center task-list-item-container">' +
+          '<div class="list-item ">' +
+            toAdd +
+          '</div>' +
+          '<div class="time-taken">' +
+          '</div>' +
+            '<input type="radio" name="cb" class="list-checkbox" />' +
+        '</div>'+
         '</li>'
       );
     }
-    $('ol').sortable();
+    // $('ol').sortable();
+    // Clear the list input when a task is added
+    $('.list-input').val("");
+   makeDraggable();
   });
 
   // Press enter to add item to list
   $(document).on('keyup','.list-input', function(){
     if(event.keyCode == 13){
         $(this).closest('.list-box').find(".add-to-list").click();
+        // Clear the list input when a task is added
+        $('.list-input').val("");
     }
+
   });
 
   $(document).on('click','.list-item', function(){
     // $(this).toggleClass('strike').fadeOut('slow');
     $(this).toggleClass('strike');
-
   });
 
-  // $('ol').sortable();
+// Show your active task at the top of the screen
+  $(document).on('click', '.list-checkbox', function() {
+    var selectedTask = $(this).siblings('.list-item').text();
+
+    $(".currently-selected-task").fadeOut(function() {
+      $('.currently-selected-task').text(selectedTask);
+    }).fadeIn();
+  });
+
+// Log the time for the currently selected task
+  $(document).on('click', '.stopButton', function(){
+    var stopTime = $('.values').text();
+    if ($('input.list-checkbox').is(':checked')) {
+      $('input.list-checkbox:checked').siblings('.time-taken').text("H:M:S " + stopTime);
+      $('input.list-checkbox:checked').siblings('.list-item').toggleClass('strike');
+    }
+  });
 
   var listMaker = function( number ){
 
@@ -51,14 +83,16 @@ $(document).ready(function(){
           ' <h6 class="list-header">' + stringifyNumber(number) + ' hour</h6>' +
     	    '	<input type="text" name="ListItem" class="list-input" autocomplete="off"/>' +
         ' </div>' +
-        ' <div>' +
-          ' <h3 class="add-to-list">Add</h3>' +
-          ' <ol class="list"></ol> '+
+        ' <div class="column ui-sortable">' +
+          ' <h3 class="add-to-list">+ Task</h3>' +
+          ' <ol class="list">'+
+          '</ol> '+
         ' </div>'
       );
     }
   }
 
+// Add an hour to the task holder div
   if( $('#add-hour').length ){
     var numberOfRows = 0;
     var numberOfHours = 1;
@@ -74,7 +108,7 @@ $(document).ready(function(){
         listMaker( numberOfHours );
         numberOfHours++;
        }
-
+       makeDraggable();
     });
   }
 
@@ -82,13 +116,31 @@ $(document).ready(function(){
   $('.daily-hourly').on('click', function() {
     if( $('.daily-hourly').text() == 'Daily'){
       $(this).text('Hourly');
-      $('.task-holder').hide();
-      $('.daily-container').show();
+      $('.task-holder').fadeOut('slow');
+      $('.footer').fadeOut('slow');
+      $('.daily-container').fadeIn('slow');
     }
     else if( $('.daily-hourly').text() == 'Hourly'){
       $(this).text('Daily');
-      $('.task-holder').show();
-      $('.daily-container').hide();
+      $('.task-holder').fadeIn('slow');
+      $('.footer').fadeIn('slow');
+      $('.daily-container').fadeOut('slow');
+    }
+  });
+
+  // Toggle between daily and hourly tasks
+  $('.stopwatch-toggle').on('click', function() {
+    if( $('.stopwatch-toggle').hasClass('show-stopwatch')){
+      $('.stopwatch').fadeOut('slow');
+      $('.stopwatch-toggle').addClass('hide-stopwatch');
+      $('.stopwatch-toggle').removeClass('show-stopwatch');
+      // $('.list-checkbox').fadeIn('slow');
+    }
+    else if($('.stopwatch-toggle').hasClass('hide-stopwatch')){
+      $('.stopwatch').fadeIn('slow');
+      $('.stopwatch-toggle').removeClass('hide-stopwatch');
+      $('.stopwatch-toggle').addClass('show-stopwatch');
+      // $('.list-checkbox').fadeOut('slow');
     }
   });
 

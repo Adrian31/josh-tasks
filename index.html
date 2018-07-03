@@ -9,7 +9,6 @@
 		<link rel="stylesheet" href="css/jquery-ui.css">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/style.css">
-		<!-- <link rel="stylesheet" href="css/checkbox.css"> -->
 	</head>
 
 	<body>
@@ -24,22 +23,28 @@
 			</h1>
 
 			<div class="justify-content-end">
+				<button type="button" class="btn btn-success stopwatch-toggle show-stopwatch">Stopwatch</button>
 				<button type="button" class="btn btn-secondary daily-hourly">Daily</button>
 			</div>
 		</nav>
 		<!-- Stopwatch -->
-		<div class="stopwatch">
+		<div class="stopwatch justify-content-between row align-items-center">
 			<div class="col-md-3">
-			<div id="chronoExample">
-	    	<div class="values">00:00:00</div>
-	    	<div>
-	        <button class="startButton btn btn-primary">Start</button>
-	        <button class="pauseButton btn btn-secondary" >Pause</button>
-	        <!-- <button class="stopButton">Stop</button> -->
-	        <button class="resetButton btn btn-danger">Reset</button>
-	  		</div>
+				<div id="chronoExample">
+		    	<div class="values">00:00:00</div>
+		    	<div>
+		        <button class="startButton btn btn-primary">Start</button>
+		        <button class="pauseButton btn btn-secondary" >Pause</button>
+		        <button class="stopButton btn btn-secondary">Stop</button>
+		        <button class="resetButton btn btn-danger">Reset</button>
+		  		</div>
+				</div>
 			</div>
-		</div>
+			<div class="col-md-5">
+				<h3 class="currently-selected-task">
+					The task you select will appear here.
+				</h3>
+			</div>
 		</div>
 
     <div class="container">
