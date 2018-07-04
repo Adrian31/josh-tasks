@@ -8,7 +8,6 @@ $(document).ready(function(){
   }
 
   var makeDraggable = function() {
-    console.log("hi");
     $( ".column" ).sortable({
           connectWith: ".column",
           handle: ".portlet-header",
@@ -19,7 +18,7 @@ $(document).ready(function(){
         $( ".portlet" )
           .addClass( "ui-widget ui-widget-content ui-helper-clearfix" )
           .find( ".portlet-header" )
-            .prepend( "<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+            .prepend( "<span class='ui-icon-minusthick portlet-toggle'></span>");
 
         $( ".portlet-toggle" ).on( "click", function() {
           var icon = $( this );
@@ -80,13 +79,40 @@ $(document).ready(function(){
 
 // Log the time for the currently selected task
   $(document).on('click', '.stopButton', function(){
+    var currentTask = $('input.list-checkbox:checked').siblings('.time-taken');
+    // console.log(currentTask);
+    var recountTime;
     var stopTime = $('.values').text();
     if ($('input.list-checkbox').is(':checked')) {
-      $('input.list-checkbox:checked').siblings('.time-taken').text("H:M:S " + stopTime);
+      currentTask.text("H:M:S " + stopTime);
+      currentTask.val(timer.getTotalTimeValues().seconds);
+      // console.log($('input.list-checkbox:checked').siblings('.time-taken').val());
       $('input.list-checkbox:checked').siblings('.list-item').toggleClass('strike');
     }
+    timer.stop();
   });
 
+  $('#chronoExample .startButton').click(function () {
+    var currentTask = $('input.list-checkbox:checked').siblings('.time-taken');
+    // console.log("Current value is : " + currentTask.val());
+    startTime = parseInt(currentTask.val());
+    // console.log(startTime);
+      // timer.start
+      if( currentTask.val() !== '' ){
+        console.log(currentTask);
+          timer.start({startValues: {seconds: startTime}});
+      }else{
+        timer.start();
+      }
+  });
+  // Set start time if there is one already recorded
+  $(document).on('click', 'input.list-checkbox:checked', function(){
+    var currentTask = $('input.list-checkbox:checked').siblings('.time-taken');
+    console.log(currentTask.val());
+    if( currentTask.val() !== ''){
+      console.log("hi");
+    }
+  });
   var listMaker = function( number ){
 
     if( $('#add-hour').length) {

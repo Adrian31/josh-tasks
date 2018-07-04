@@ -1,13 +1,17 @@
-var timer = new Timer();
+var timer = new Timer
+var currentTask = $('input.list-checkbox:checked').siblings('.time-taken');
 $('#chronoExample .startButton').click(function () {
-    timer.start();
+      timer.start;
+    // }
+
 });
 $('#chronoExample .pauseButton').click(function () {
     timer.pause();
 });
-$('#chronoExample .stopButton').click(function () {
-    timer.stop();
-});
+// $('#chronoExample .stopButton').click(function () {
+//     timer.stop();
+//     // timer.pause();
+// });
 $('#chronoExample .resetButton').click(function () {
     timer.reset();
     timer.pause();
