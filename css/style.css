@@ -1,3 +1,14 @@
+body{
+  padding: 0;
+  margin: 0;
+ /* heig  ht: 100vh; */
+}
+#particles-js{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #F69697;
+}
 #bg {
   position: fixed;
   top: 0;
@@ -43,7 +54,7 @@ video#bgvid {
 
 .values{
   font-size: 160%;
-  color: grey;
+  color: white;
 }
 
 @media screen and (max-width: 800px){
@@ -182,7 +193,7 @@ li * {
 
 /* TIMER */
   .currently-selected-task {
-    color: grey;
+    color: white;
   }
 /* */
 /* input */
