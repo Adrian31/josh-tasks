@@ -1,13 +1,10 @@
-body{
-  padding: 0;
-  margin: 0;
- /* heig  ht: 100vh; */
-}
+
 #particles-js{
   position: fixed;
   height: 100%;
   width: 100%;
   background: #F69697;
+  z-index: -1
 }
 #bg {
   position: fixed;
@@ -243,9 +240,6 @@ li * {
 
 
 /* JQUERY PORTLET */
-body {
-    min-width: 520px;
-  }
   .column {
     border-bottom: 2px solid #6c757d;
     padding-bottom: 50px;
